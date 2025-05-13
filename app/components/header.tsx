@@ -17,7 +17,7 @@ const header = () => {
                         <Link href="/about">About Us</Link>
                     </li>
                     <li>
-                        <Link href="/blog/hello-world">Blog Post</Link>
+                        <Link href="/productos">pro</Link>
                     </li>
                 </ul>       <FaReact></FaReact>
             </header>

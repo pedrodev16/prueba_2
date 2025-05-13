@@ -1,7 +1,8 @@
 
-
+"use client";
 import Header from '../components/header';
 import { getDatos } from '../actions/getDatos';
+import { useEffect, useState } from 'react';
 
 
 
@@ -12,18 +13,19 @@ import { getDatos } from '../actions/getDatos';
 
 
 const page = () => {
-    const Datos = async () => {
-        const datosa = await getDatos();
-        console.log(datosa);
-        return (
-            <div>
-                <h1>Datos desde MySQL</h1>
-                <ul>
+    const [datosa, setDatosa] = useState<any[]>([]);
 
-                </ul>
-            </div>
-        );
-    };
+    useEffect(() => {
+        const fetchDatos = async () => {
+            const datos = await getDatos();
+            setDatosa(datos);
+
+        };
+
+        fetchDatos();
+    }, []);
+
+    console.log(datosa);
     // async function Datos() {
     //     const datos = await getDatos();
 
@@ -33,7 +35,7 @@ const page = () => {
     return (
         <div>
             <Header />
-            <h1>{Datos()}</h1>
+
         </div>
     );
 
