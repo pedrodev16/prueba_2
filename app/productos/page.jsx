@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 
 
 const page = () => {
-    const [datosa, setDatosa] = useState<any[]>([]);
+    const [datosa, setDatosa] = useState([]);
 
     useEffect(() => {
         const fetchDatos = async () => {
