@@ -2,9 +2,9 @@
 import { FC, PropsWithChildren } from "react";
 import '@/app/ui/globals.css';
 import { SessionProvider } from "next-auth/react";
-import { GuardarIdGoogle } from './lib/user';
+
 const RootLayout: FC<PropsWithChildren> = ({ children }: PropsWithChildren) => {
-    GuardarIdGoogle();
+
     console.log('funciona');
     return (
         <html lang="en">
