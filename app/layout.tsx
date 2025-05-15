@@ -1,6 +1,7 @@
+"use client";
 import { FC, PropsWithChildren } from "react";
 import '@/app/ui/globals.css';
-
+import { SessionProvider } from "next-auth/react";
 const RootLayout: FC<PropsWithChildren> = ({ children }: PropsWithChildren) => {
     return (
         <html lang="en">
@@ -11,7 +12,9 @@ const RootLayout: FC<PropsWithChildren> = ({ children }: PropsWithChildren) => {
             </head>
 
             <body>
-                {children}</body>
+                <SessionProvider>
+                    {children}
+                </SessionProvider></body>
         </html>
     );
 }

@@ -5,15 +5,18 @@ export async function getDatos() {
     const connection = await mysql.createConnection({
 
 
-        host: "mysql-pedrodev16.alwaysdata.net",
-        port: 3306,
-        user: "411793",
-        password: "Lol2024..",
-        database: "pedrodev16_p"
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME
+
     });
 
+
+
     try {
-        const [rows] = await connection.query('SELECT * FROM `mensajes`');
+        const [rows] = await connection.query('SELECT * FROM `rifas`');
         return rows;
     } catch (error) {
         return { error: error.message };
