@@ -34,7 +34,12 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/about/pages.js",
-    "app/about.js"
+    "app/about.js",
+    "app/components/Rifalist.jsx",
+    "app/components/Rifalist.jsx",
+    "app/page.jsx",
+    "app/contact/page.jsx",
+    "app/productos/page.jsx"
   ],
   "exclude": [
     "node_modules"
