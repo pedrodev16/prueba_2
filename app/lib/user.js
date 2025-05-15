@@ -14,7 +14,7 @@ export function GuardarIdGoogle() {
             // Verificar si el ID de Google ya existe en la base de datos
             existeIdGoogle(id_google).then((existe) => {
                 if (!existe) {
-                    Set_usuario_auth(nombre, email, id_google)
+                    Set_usuario_auth(nombre, '', email, '', id_google)
                         .then((response) => console.log('ID de Google guardado:', response))
                         .catch((error) => console.error('Error al guardar el ID:', error));
                 } else {
