@@ -6,7 +6,7 @@ export async function Set_usuario_auth(nombre, apellido, email, telefono, auth_g
 
     try {
         const [result] = await connection.query(
-            'INSERT INTO `rifas` (nombre, apellido, email, telefono, auth_google_id) VALUES (?, ?, ?, ?, ?)',
+            'INSERT INTO `usuarios` (nombre, apellido, email, telefono, auth_google_id) VALUES (?, ?, ?, ?, ?)',
             [nombre, apellido, email, telefono, auth_google_id]
         );
         return { insertId: result.insertId };
@@ -21,7 +21,7 @@ export async function existeIdGoogle(id_google) {
 
     try {
         const [rows] = await connection.query(
-            'SELECT * FROM `rifas` WHERE auth_google_id = ?',
+            'SELECT * FROM `usuarios` WHERE auth_google_id = ?',
             [id_google]
         );
         return rows;
