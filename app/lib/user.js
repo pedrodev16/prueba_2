@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react';
 import { Set_usuario_auth, existeIdGoogle } from '../database/models/Set_usuario_auth';
 //guardar id_google en la base de datos mysql
 
-export default function GuardarIdGoogle() {
+export function GuardarIdGoogle() {
     const { data: session } = useSession();
 
     useEffect(() => {
