@@ -1,8 +1,8 @@
-import NextAuth from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
-import mysql from 'mysql2/promise';
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import mysql from "mysql2/promise";
 
-export default NextAuth({
+const authOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
@@ -22,7 +22,7 @@ export default NextAuth({
             const [rows] = await connection.execute('SELECT * FROM usuarios WHERE id_google = ?', [user.id]);
 
             if (rows.length === 0) {
-                // Si el usuario no existe, guárdalo en la base de datos
+                // Si el usuario no existe, se guarda en la base de datos
                 await connection.execute(
                     'INSERT INTO usuarios (id_google, nombre, email) VALUES (?, ?, ?)',
                     [user.id, user.name, user.email]
@@ -34,4 +34,7 @@ export default NextAuth({
         },
     },
     secret: process.env.NEXTAUTH_SECRET,
-});
+};
+
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST }; // ✅ Adaptación para Next.js 13+ con "app" directory
