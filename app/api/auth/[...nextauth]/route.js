@@ -1,24 +1,21 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import mysql from "mysql2/promise";
+import { createConnection } from '../../../database/conexion';
 
-const authOptions = {
+
+
+const handler = NextAuth({
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
-    ],
-    callbacks: {
-        async signIn({ user }) {
-            const connection = await mysql.createConnection({
-                host: process.env.DB_HOST,
-                port: process.env.DB_PORT,
-                user: process.env.DB_USER,
-                password: process.env.DB_PASSWORD,
-                database: process.env.DB_NAME
-            });
 
+    ], callbacks: {
+        async signIn({ user }) {
+            const connection = await createConnection();
+
+            // Verificar si el usuario ya existe en la base de datos
             const [rows] = await connection.execute('SELECT * FROM usuarios WHERE id_google = ?', [user.id]);
 
             if (rows.length === 0) {
@@ -30,11 +27,10 @@ const authOptions = {
             }
 
             await connection.end();
-            return true; // Permitir inicio de sesión
+            return true;
         },
     },
     secret: process.env.NEXTAUTH_SECRET,
-};
+});
 
-const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST }; // ✅ Adaptación para Next.js 13+ con "app" directory
+export { handler as GET, handler as POST };
